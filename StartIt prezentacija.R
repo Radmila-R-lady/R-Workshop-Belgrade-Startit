@@ -56,48 +56,6 @@ t(matrix_3by2)
 
 
 
-# identity matrix
-
-diag(4)
-View(diag(4))
-
-#mnozenje matrica
-#
-A=matrix( 
-  c(2, 4, 3, 1, 5, 7), 
-  nrow=3, 
-  ncol=2) 
-
-B= matrix( 
-  c(2, 4, 3, 1, 5, 7), 
-  nrow=2, 
-  ncol=3) 
-A
-B
-A%*%B
-#idempotent matrix
-
-C=matrix(c(4,-1,12,-3),
-         nrow = 2,
-         ncol=2, byrow=T)
-C
-C%*%C
-
-#inverse matrix
-
-C1=matrix(c(4,-1,12,-2),
-          nrow = 2,
-          ncol=2, byrow=T)
-
-C1
-solve(C1)
-
-D<-matrix(c(-5,0,2,1,-2,3,6,-2,1),
-          nrow=3,
-          ncol=3, byrow=T)
-
-D
-solve(D)
 
 #replicate first 4 numbers twice
 rep(1:4,2 )
@@ -134,11 +92,7 @@ table(gender)
 
 # DATA MANIPULATION -------------------------------------------------------
 
-
-library(foreign)
 library(dplyr)
-ESS<-as.data.frame(read.spss("C:/Users/Rada/Desktop/setovi_podataka/ESS8e02_1.sav", use.value.labels=T, max.value.labels=Inf, use.missings=F))
-View(ESS)
 
 #filtriranje podataka po jednom kriterujumu
 ESS.DE<-filter(ESS, cntry== "Germany" )
@@ -156,7 +110,7 @@ View(ESS.DE)
 
 #izdvajanje kolona po zelji
 #cntry-country/ pointr-political interest, 
-#trstprl-trust in country´s parliament
+#trstprl-trust in countryÂ´s parliament
 #trstlgl-trust in legal system
 #trstplc-trust in police
 #trstplt-trust in politicians
@@ -187,13 +141,7 @@ View(by.country)
 library(ggplot2)
 
 
-ggplot(data = mpg) #nije od znacaja ali omogucava stavljanje slojeva (layers)
-
-ggplot(data = mpg) + 
-  geom_point(mapping = aes(x = displ, y = hwy))   #napravili smo dijagram rasprsenosti
-
-#kojoj klasi pripada koji automobil
-
+# klasa automobila
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, color = class))
 
@@ -208,11 +156,6 @@ ggplot(data = mpg) +
 
 #dijagram frekvencija
 
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut))
-
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, colour = cut))
 
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, fill = cut))
@@ -236,13 +179,10 @@ ESS$nwspol<-as.numeric(ESS$nwspol)
 
 library(psych)
 describeBy(ESS$nwspol, 
-           group = ESS$cntry,
-           digits= 4)
+           group = ESS$cntry)
 
 #prosta linearna regresija
 
-getwd()
-setwd("C:/Users/Rada/POSM laptop/UZH/unine/mati")
 houses<-read.table("houses.txt",header=T)
 View(houses)
 attach(houses)
